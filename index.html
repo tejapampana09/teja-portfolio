@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pampana Tulasi Teja - creative frontend engineer, realtime systems builder, and full stack developer.">
+    <title>Pampana Tulasi Teja | Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+    <div class="loader" aria-hidden="true">
+        <div class="loader__panel loader__panel--a"></div>
+        <div class="loader__panel loader__panel--b"></div>
+        <div class="loader__panel loader__panel--c"></div>
+        <div class="loader__mark">
+            <span>Portfolio</span>
+            <strong>TEJA</strong>
+        </div>
+    </div>
+
+    <div class="progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+    <canvas class="field" id="field" aria-hidden="true"></canvas>
+    <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="light light--one" aria-hidden="true"></div>
+    <div class="light light--two" aria-hidden="true"></div>
+    <div class="light light--three" aria-hidden="true"></div>
+
+    <header class="header">
+        <nav class="nav">
+            <a class="brand magnetic" href="#home" aria-label="Go to home">
+                <span>T</span>
+                <strong>TEJA</strong>
+            </a>
+
+            <div class="nav__links" id="nav-menu">
+                <a href="#home" class="nav__link active">Intro</a>
+                <a href="#about" class="nav__link">About</a>
+                <a href="#stack" class="nav__link">Skills</a>
+                <a href="#projects" class="nav__link">Projects</a>
+                <a href="#contact" class="nav__link">Contact</a>
+            </div>
+
+            <button class="nav__toggle magnetic" id="nav-toggle" type="button" aria-label="Open menu">
+                <ion-icon name="menu-outline"></ion-icon>
+            </button>
+            <button class="nav__theme-toggle magnetic" id="theme-toggle" type="button" aria-label="Toggle theme">
+                <ion-icon name="moon-outline"></ion-icon>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero scene" id="home">
+            <div class="hero__bg-word" aria-hidden="true">TEJA</div>
+            <div class="hero__copy">
+                <p class="kicker split-line">Pampana Tulasi Teja </p>
+                <h1 class="hero__title split-title">Creative student passionate about building interfaces and realtime applications.</h1>
+                <div class="role-loop" aria-label="Roles">
+                    <span>Computer Science Student</span>
+                    <span>Full Stack Developer</span>
+                    <span>Realtime Systems Builder</span>
+                    <span>Creative Frontend Developer</span>
+                </div>
+                <div class="hero__actions">
+                    <a href="#projects" class="button button--solid magnetic">
+                        <span>Projects</span>
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </a>
+                    <a href="teja gadu.pdf" class="button button--glass magnetic" download>
+                        <span>Download Resume</span>
+                        <ion-icon name="download-outline"></ion-icon>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero__portrait-wrap">
+                <div class="portrait" id="portrait">
+                    <img class="portrait__main" src="assets/img/img.png" alt="Pampana Tulasi Teja">
+                    <span class="portrait__tag portrait__tag--one">8.12 CGPA</span>
+                    <span class="portrait__tag portrait__tag--two">Firebase / Node</span>
+                </div>
+            </div>
+
+            <div class="hero__footer">
+                <span>Andhra Pradesh, India</span>
+                <span>B.Tech Computer Science</span>
+                <span>Scroll to enter</span>
+            </div>
+        </section>
+
+        <section class="story scene" id="about">
+            <div class="story__sticky">
+                <p class="kicker split-line">About / Builder Profile</p>
+                <div class="hero__bg-word" aria-hidden="true">TEJA</div>
+                <h2 class="section-title split-title">I build interfaces that feel fast, alive, and a little dangerous.</h2>
+            </div>
+
+            <div class="story__chapters">
+                <article class="chapter">
+                    <span>01</span>
+                    <h3>Student by degree. Builder by instinct.</h3>
+                    <p>I am a Computer Science undergraduate at SRM University AP, focused on full stack development, realtime applications, Firebase systems, and modern frontend experiences.</p>
+                </article>
+                <article class="chapter">
+                    <span>02</span>
+                    <h3>Realtime is my favorite kind of interface.</h3>
+                    <p>I enjoy building social platforms, chat systems, group flows, typing indicators, and web apps where the UI reacts instantly to people.</p>
+                </article>
+                <article class="chapter">
+                    <span>03</span>
+                    <h3>Hackathon pace, production taste.</h3>
+                    <p>I like moving from idea to demo quickly while keeping the craft sharp: clean hierarchy, cinematic motion, responsive layouts, and scalable structure.</p>
+                </article>
+                <article class="chapter chapter--stats">
+                    <div><span>CGPA</span><strong>8.12/10</strong></div>
+                    <div><span>Degree</span><strong>B.Tech CSE</strong></div>
+                    <div><span>Focus</span><strong>Realtime Systems</strong></div>
+                </article>
+            </div>
+        </section>
+
+        <section class="marquee-scene" id="stack" aria-label="Technology stack">
+            <div class="marquee marquee--forward">
+                <div class="marquee__track">
+                    <span>JavaScript</span><span>Firebase</span><span>GSAP</span><span>Node.js</span><span>Realtime Systems</span><span>Frontend Engineering</span><span>Hackathons</span><span>UI/UX</span>
+                    <span>JavaScript</span><span>Firebase</span><span>GSAP</span><span>Node.js</span><span>Realtime Systems</span><span>Frontend Engineering</span><span>Hackathons</span><span>UI/UX</span>
+                </div>
+            </div>
+            <div class="marquee marquee--reverse">
+                <div class="marquee__track">
+                    <span>Firestore</span><span>REST APIs</span><span>Python</span><span>C++</span><span>MySQL</span><span>OOP</span><span>DBMS</span><span>Responsive Design</span>
+                    <span>Firestore</span><span>REST APIs</span><span>Python</span><span>C++</span><span>MySQL</span><span>OOP</span><span>DBMS</span><span>Responsive Design</span>
+                </div>
+            </div>
+        </section>
+
+       <section class="projects scene" id="projects">
+    <div class="projects__container">
+        <div class="hero__bg-word" aria-hidden="true">TEJA</div>
+        <div class="projects__rail" id="projects-rail">
+            <article class="case case--one">
+                <div class="case__image">
+                    <img src="assets/img/img.png" alt="Campus Connect">
+                </div>
+                <div class="case__content">
+                    <span class="case__index">01</span>
+                    <h3>Campus Connect</h3>
+                    <p>Realtime campus social platform with anonymous chat, friend systems, group chat, typing indicators, Firebase backend, and synchronization that keeps people present.</p>
+                    <div class="case__tags">
+                        <span>Firebase</span><span>Realtime Sync</span><span>Social Platform</span>
+                    </div>
+                    <div class="case__actions">
+                        <a href="#" class="button button--solid magnetic">Live Demo</a>
+                        <a href="#" class="button button--glass magnetic">GitHub</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="case case--two">
+                <div class="case__image">
+                    <img src="assets/img/img.png" alt="Vital Plasma">
+                </div>
+                <div class="case__content">
+                    <span class="case__index">02</span>
+                    <h3>Vital Plasma</h3>
+                    <p>Plasma donor management system with Node.js backend, REST APIs, donor registration, responsive UI, and realtime data handling for urgent workflows.</p>
+                    <div class="case__tags">
+                        <span>Node.js</span><span>REST APIs</span><span>Health Tech</span>
+                    </div>
+                    <div class="case__actions">
+                        <a href="#" class="button button--solid magnetic">Live Demo</a>
+                        <a href="#" class="button button--glass magnetic">GitHub</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="case case--three">
+                <div class="case__image">
+                    <img src="assets/img/img.png" alt="QuantumCrop AI">
+                </div>
+                <div class="case__content">
+                    <span class="case__index">03</span>
+                    <h3>QuantumCrop AI</h3>
+                    <p>AI-powered smart agriculture concept with crop analysis, prediction logic, machine learning thinking, and scalable architecture for smarter decisions.</p>
+                    <div class="case__tags">
+                        <span>Python</span><span>AI Concepts</span><span>Prediction System</span>
+                    </div>
+                    <div class="case__actions">
+                        <a href="#" class="button button--solid magnetic">Live Demo</a>
+                        <a href="#" class="button button--glass magnetic">GitHub</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <div class="projects__intro">
+            <p class="kicker split-line">Selected Work / Case Studies</p>
+            <h2 class="section-title split-title">Three builds, one pattern: make the system feel alive.</h2>
+        </div>
+
+    </div>
+</section>
+
+        <section class="credentials scene">
+            <div class="credentials__headline">
+                <div class="hero__bg-word" aria-hidden="true">TEJA</div>
+                <p class="kicker split-line">Signals / Education</p>
+                <h2 class="section-title split-title">A computer science path shaped by prototypes, systems, and motion.</h2>
+            </div>
+            <div class="credentials__grid">
+                <article>
+                    <span>University</span>
+                    <h3>SRM University AP</h3>
+                    <p>B.Tech Computer Science with 8.12/10 CGPA.</p>
+                </article>
+                <article>
+                    <span>Certification</span>
+                    <h3>Azure Fundamentals</h3>
+                    <p>Cloud foundations and deployment thinking.</p>
+                </article>
+                <article>
+                    <span>Certification</span>
+                    <h3>Python Certification</h3>
+                    <p>Programming foundations and problem solving.</p>
+                </article>
+                <article>
+                    <span>Practice</span>
+                    <h3>Hackathon Skills</h3>
+                    <p>Rapid prototyping, demo storytelling, and teamwork.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="contact scene" id="contact">
+            <div class="contact__orb" aria-hidden="true"></div>
+            <p class="kicker split-line">Contact Me </p>
+            <h2 class="contact__title split-title">Let’s build the next digital experience.</h2>
+            <p class="contact__text">Open to collaborations, hackathon teams, realtime app ideas, frontend experiments, and product builds with energy.</p>
+            <div class="contact__actions">
+                <a href="mailto:teja@example.com" class="button button--solid magnetic">
+                    <span>Start a Conversation</span>
+                    <ion-icon name="mail-outline"></ion-icon>
+                </a>
+                <a href="#" class="button button--glass magnetic">
+                    <span>GitHub</span>
+                    <ion-icon name="logo-github"></ion-icon>
+                </a>
+            </div>
+            <div class="contact__signature">Pampana Tulasi Teja</div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <span>Creative frontend engineering / realtime systems</span>
+        <span>SRM University AP / 2026</span>
+    </footer>
+    <!-- Taskbar: frosted-glass dock with rounded corners -->
+    <div class="taskbar glass" role="navigation" aria-label="Taskbar">
+        <div class="taskbar__inner">
+            <a href="#home">
+                <button class="taskbar__item" aria-label="Home">
+                    <ion-icon name="home-outline"></ion-icon>
+                </button></a>
+            <a href="#contact">
+                <button class="taskbar__item" aria-label="Contact">
+                    <ion-icon name="mail-outline"></ion-icon>
+                </button></a>
+            <a href="teja gadu.pdf" download>
+                <button class="taskbar__item taskbar__item--accent" aria-label="Resume">
+                    <ion-icon name="download-outline"></ion-icon>
+                </button></a>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

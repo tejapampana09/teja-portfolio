@@ -1,0 +1,164 @@
+/* MOBILE-FIRST APP REDESIGN (OVERRIDES) */
+/* Based on your uploaded mobile redesign CSS */
+
+.hero__quick-badges,
+.chapter__icon,
+.chapter__mobile-title,
+.contact__cards,
+.case__tags--mobile,
+.hero__title-mobile {
+    display: none;
+}
+
+@media (max-width: 980px) {
+
+    .hero__footer,
+    .contact__actions,
+    .taskbar,
+    .mobile-tabbar,
+    .hero__title,
+    .role-loop {
+        display: none !important;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .hero {
+        align-items: center;
+        text-align: center;
+        padding-top: 5rem;
+        gap: 1rem;
+    }
+
+    .hero__portrait-wrap {
+        order: -2;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 1rem;
+        animation: portraitReveal .9s ease;
+    }
+
+    .kicker { order: -1; }
+
+    .hero__title-mobile {
+        display: block;
+        order: 0;
+        font-size: clamp(2.6rem, 11vw, 3.8rem);
+        font-weight: 700;
+        margin: .5rem 0 1rem;
+        line-height: 1.05;
+    }
+
+    .hero__actions {
+        order: 1;
+        justify-content: center;
+    }
+
+    .hero__quick-badges {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: .6rem;
+        margin-top: 1rem;
+    }
+
+    .hero__quick-badges span {
+        padding: .5rem .8rem;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--glass);
+        backdrop-filter: blur(8px);
+    }
+
+    .nav {
+        animation: navAppear .8s ease;
+    }
+
+    .nav__toggle {
+        margin-left: auto;
+    }
+
+    .chapter,
+    .case,
+    .credentials__grid article,
+    .contact__cards a {
+        background: rgba(255,255,255,.05);
+        border: 1px solid rgba(255,255,255,.08);
+        backdrop-filter: blur(14px);
+        transition: transform .3s ease, box-shadow .3s ease;
+        animation: mobileFadeUp .8s ease both;
+    }
+
+    .chapter:active,
+    .case:active,
+    .credentials__grid article:active,
+    .contact__cards a:active {
+        transform: scale(.98);
+    }
+
+    .projects__rail {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .case__image {
+        height: 180px;
+        overflow: hidden;
+        border-radius: 12px;
+    }
+
+    .credentials__grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .contact__cards {
+        display: grid;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .contact__cards a {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        border-radius: 12px;
+    }
+}
+
+@keyframes mobileFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes portraitReveal {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes navAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

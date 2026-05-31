@@ -9,7 +9,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- <link rel="stylesheet" href="assets/css/styles.css"> -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="light-theme.css">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="stylesheet" href="animations.css">
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -63,6 +67,7 @@
             <div class="hero__copy">
                 <p class="kicker split-line">Pampana Tulasi Teja </p>
                 <h1 class="hero__title split-title">Creative student passionate about building interfaces and realtime applications.</h1>
+                <h1 class="hero__title-mobile">Hello, I'm Teja.</h1>
                 <div class="role-loop" aria-label="Roles">
                     <span>Computer Science Student</span>
                     <span>Full Stack Developer</span>
@@ -71,7 +76,8 @@
                 </div>
                 <div class="hero__actions">
                     <a href="#projects" class="button button--solid magnetic">
-                        <span>Projects</span>
+                        <span class="button__desktop-label">Projects</span>
+                        <span class="button__mobile-label">View Projects</span>
                         <ion-icon name="arrow-forward-outline"></ion-icon>
                     </a>
                     <a href="teja gadu.pdf" class="button button--glass magnetic" download>
@@ -88,11 +94,16 @@
                     <span class="portrait__tag portrait__tag--two">Firebase / Node</span>
                 </div>
             </div>
-
             <div class="hero__footer">
-                <span>Andhra Pradesh, India</span>
-                <span>B.Tech Computer Science</span>
-                <span>Scroll to enter</span>
+                <span><ion-icon name="location-outline"></ion-icon>Andhra Pradesh, India</span>
+                <span><ion-icon name="briefcase-outline"></ion-icon>B.Tech Computer Science</span>
+                <span><ion-icon name="phone-portrait-outline"></ion-icon>Scroll to enter</span>
+            </div>
+            <div class="hero__quick-badges" aria-label="Quick facts">
+                <span><ion-icon name="ribbon-outline"></ion-icon>8.12 CGPA</span>
+                <span><ion-icon name="flame-outline"></ion-icon>Firebase / Node.js</span>
+                <span><ion-icon name="location-outline"></ion-icon>Andhra Pradesh</span>
+                <span><ion-icon name="school-outline"></ion-icon>B.Tech CSE</span>
             </div>
         </section>
 
@@ -105,17 +116,23 @@
 
             <div class="story__chapters">
                 <article class="chapter">
-                    <span>01</span>
+                    <span class="chapter__icon"><ion-icon name="bag-handle-outline"></ion-icon></span>
+                    <span class="chapter__index">01</span>
+                    <h3 class="chapter__mobile-title">Builder by Instinct</h3>
                     <h3>Student by degree. Builder by instinct.</h3>
                     <p>I am a Computer Science undergraduate at SRM University AP, focused on full stack development, realtime applications, Firebase systems, and modern frontend experiences.</p>
                 </article>
                 <article class="chapter">
-                    <span>02</span>
+                    <span class="chapter__icon"><ion-icon name="flash-outline"></ion-icon></span>
+                    <span class="chapter__index">02</span>
+                    <h3 class="chapter__mobile-title">Realtime Systems Builder</h3>
                     <h3>Realtime is my favorite kind of interface.</h3>
                     <p>I enjoy building social platforms, chat systems, group flows, typing indicators, and web apps where the UI reacts instantly to people.</p>
                 </article>
                 <article class="chapter">
-                    <span>03</span>
+                    <span class="chapter__icon"><ion-icon name="trophy-outline"></ion-icon></span>
+                    <span class="chapter__index">03</span>
+                    <h3 class="chapter__mobile-title">Hackathon Mindset</h3>
                     <h3>Hackathon pace, production taste.</h3>
                     <p>I like moving from idea to demo quickly while keeping the craft sharp: clean hierarchy, cinematic motion, responsive layouts, and scalable structure.</p>
                 </article>
@@ -127,17 +144,93 @@
             </div>
         </section>
 
-        <section class="marquee-scene" id="stack" aria-label="Technology stack">
-            <div class="marquee marquee--forward">
-                <div class="marquee__track">
-                    <span>JavaScript</span><span>Firebase</span><span>GSAP</span><span>Node.js</span><span>Realtime Systems</span><span>Frontend Engineering</span><span>Hackathons</span><span>UI/UX</span>
-                    <span>JavaScript</span><span>Firebase</span><span>GSAP</span><span>Node.js</span><span>Realtime Systems</span><span>Frontend Engineering</span><span>Hackathons</span><span>UI/UX</span>
+        <section class="skills scene" id="stack">
+            <div class="skills__container">
+                <div class="hero__bg-word" aria-hidden="true">TEJA</div>
+                <div class="skills__header">
+                    <p class="kicker split-line">Skills & Stack</p>
+                    <h2 class="section-title split-title">Technologies I Work With</h2>
+                    <p class="skills__subtitle">Skills, tools, and technologies I use to build modern applications.</p>
                 </div>
-            </div>
-            <div class="marquee marquee--reverse">
-                <div class="marquee__track">
-                    <span>Firestore</span><span>REST APIs</span><span>Python</span><span>C++</span><span>MySQL</span><span>OOP</span><span>DBMS</span><span>Responsive Design</span>
-                    <span>Firestore</span><span>REST APIs</span><span>Python</span><span>C++</span><span>MySQL</span><span>OOP</span><span>DBMS</span><span>Responsive Design</span>
+                
+                <div class="skills__grid">
+                    <article class="skill-card">
+                        <div class="skill-card__glow"></div>
+                        <div class="skill-card__content">
+                            <span class="skill-card__icon"><ion-icon name="code-slash-outline"></ion-icon></span>
+                            <h3>Frontend</h3>
+                            <ul>
+                                <li>HTML</li>
+                                <li>CSS</li>
+                                <li>JavaScript</li>
+                                <li>Responsive Design</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-card__glow"></div>
+                        <div class="skill-card__content">
+                            <span class="skill-card__icon"><ion-icon name="server-outline"></ion-icon></span>
+                            <h3>Backend</h3>
+                            <ul>
+                                <li>Node.js</li>
+                                <li>REST APIs</li>
+                                <li>Express.js</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-card__glow"></div>
+                        <div class="skill-card__content">
+                            <span class="skill-card__icon"><ion-icon name="layers-outline"></ion-icon></span>
+                            <h3>Database</h3>
+                            <ul>
+                                <li>Firestore</li>
+                                <li>MySQL</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-card__glow"></div>
+                        <div class="skill-card__content">
+                            <span class="skill-card__icon"><ion-icon name="cloud-outline"></ion-icon></span>
+                            <h3>Cloud</h3>
+                            <ul>
+                                <li>AWS</li>
+                                <li>Azure</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-card__glow"></div>
+                        <div class="skill-card__content">
+                            <span class="skill-card__icon"><ion-icon name="terminal-outline"></ion-icon></span>
+                            <h3>Programming</h3>
+                            <ul>
+                                <li>JavaScript</li>
+                                <li>Python</li>
+                                <li>C++</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-card__glow"></div>
+                        <div class="skill-card__content">
+                            <span class="skill-card__icon"><ion-icon name="construct-outline"></ion-icon></span>
+                            <h3>Tools</h3>
+                            <ul>
+                                <li>Git</li>
+                                <li>GitHub</li>
+                                <li>VS Code</li>
+                                <li>Firebase</li>
+                            </ul>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -157,6 +250,9 @@
                     <div class="case__tags">
                         <span>Firebase</span><span>Realtime Sync</span><span>Social Platform</span>
                     </div>
+                    <div class="case__tags case__tags--mobile">
+                        <span>Firebase</span><span>Firestore</span><span>JavaScript</span>
+                    </div>
                     <div class="case__actions">
                         <a href="#" class="button button--solid magnetic">Live Demo</a>
                         <a href="#" class="button button--glass magnetic">GitHub</a>
@@ -175,6 +271,9 @@
                     <div class="case__tags">
                         <span>Node.js</span><span>REST APIs</span><span>Health Tech</span>
                     </div>
+                    <div class="case__tags case__tags--mobile">
+                        <span>Node.js</span><span>Express.js</span><span>MySQL</span>
+                    </div>
                     <div class="case__actions">
                         <a href="https://vital-plasma.onrender.com" class="button button--solid magnetic">Live Demo</a>
                         <a href="https://github.com/tejapampana09/Vital-Plasma.git" class="button button--glass magnetic">GitHub</a>
@@ -192,6 +291,9 @@
                     <p>AI-powered smart agriculture concept with crop analysis, prediction logic, machine learning thinking, and scalable architecture for smarter decisions.</p>
                     <div class="case__tags">
                         <span>Python</span><span>AI Concepts</span><span>Prediction System</span>
+                    </div>
+                    <div class="case__tags case__tags--mobile">
+                        <span>Python</span><span>Machine Learning</span><span>AI</span>
                     </div>
                     <div class="case__actions">
                         <a href="https://quantumcrop-ai.onrender.com" class="button button--solid magnetic">Live Demo</a>
@@ -244,14 +346,46 @@
             <p class="kicker split-line">Contact Me </p>
             <h2 class="contact__title split-title">Let’s build the next digital experience.</h2>
             <p class="contact__text">Open to collaborations, hackathon teams, realtime app ideas, frontend experiments, and product builds with energy.</p>
+            
+            <div class="contact__cards">
+                <a href="mailto:tejapampana36@gmail.com">
+                    <span><ion-icon name="mail-outline"></ion-icon></span>
+                    <strong>Email</strong>
+                    <small>tejapampana36@gmail.com</small>
+                    <ion-icon name="chevron-forward-outline"></ion-icon>
+                </a>
+                <a href="https://github.com/tejapampana09">
+                    <span><ion-icon name="logo-github"></ion-icon></span>
+                    <strong>GitHub</strong>
+                    <small>github.com/tejapampana09</small>
+                    <ion-icon name="chevron-forward-outline"></ion-icon>
+                </a>
+                <a href="https://linkedin.com/in/tejapampana09">
+                    <span><ion-icon name="logo-linkedin"></ion-icon></span>
+                    <strong>LinkedIn</strong>
+                    <small>linkedin.com/in/tejapampana09</small>
+                    <ion-icon name="chevron-forward-outline"></ion-icon>
+                </a>
+                <a href="teja gadu.pdf" download>
+                    <span><ion-icon name="download-outline"></ion-icon></span>
+                    <strong>Resume</strong>
+                    <small>teja gadu.pdf</small>
+                    <ion-icon name="chevron-forward-outline"></ion-icon>
+                </a>
+            </div>
+
             <div class="contact__actions">
-                <a href="mailto:teja@example.com" class="button button--solid magnetic">
+                <a href="mailto:tejapampana36@gmail.com" class="button button--solid magnetic">
                     <span>Start a Conversation</span>
                     <ion-icon name="mail-outline"></ion-icon>
                 </a>
-                <a href="#" class="button button--glass magnetic">
+                <a href="https://github.com/tejapampana09" target="_blank" class="button button--glass magnetic">
                     <span>GitHub</span>
                     <ion-icon name="logo-github"></ion-icon>
+                </a>
+                <a href="https://linkedin.com/in/tejapampana09" target="_blank" class="button button--glass magnetic">
+                    <span>LinkedIn</span>
+                    <ion-icon name="logo-linkedin"></ion-icon>
                 </a>
             </div>
             <div class="contact__signature">Pampana Tulasi Teja</div>
@@ -279,6 +413,8 @@
                 </button></a>
         </div>
     </div>
+
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/split-type"></script>

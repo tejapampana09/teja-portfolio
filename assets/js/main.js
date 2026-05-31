@@ -1,4 +1,5 @@
 ﻿const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+const isMobilePortfolio = window.matchMedia("(max-width: 980px)").matches
 
 // Register GSAP plugins globally and inject event normalization configuration
 if (window.gsap && window.ScrollTrigger) {
@@ -80,13 +81,12 @@ const initSmoothLinks = () => {
 const initTextSplit = () => {
     if (prefersReducedMotion || !window.SplitType) return
 
-    document.querySelectorAll(".split-title, .contact__title").forEach((element) => {
+    document.querySelectorAll(".split-title, .contact__title, .hero__title-mobile").forEach((element) => {
         new SplitType(element, { types: "words, chars" })
         gsap.set(element.querySelectorAll(".char"), {
             yPercent: 115,
             opacity: 0,
-            rotateX: -80,
-            filter: "blur(12px)"
+            rotateX: -80
         })
     })
 
@@ -94,8 +94,7 @@ const initTextSplit = () => {
         new SplitType(element, { types: "words" })
         gsap.set(element.querySelectorAll(".word"), {
             yPercent: 110,
-            opacity: 0,
-            filter: "blur(8px)"
+            opacity: 0
         })
     })
 }
@@ -109,7 +108,6 @@ const revealText = (target, trigger = target) => {
             yPercent: 0,
             opacity: 1,
             rotateX: 0,
-            filter: "blur(0px)",
             duration: 1,
             stagger: .012,
             ease: "power4.out",
@@ -124,7 +122,6 @@ const revealText = (target, trigger = target) => {
         return gsap.to(words, {
             yPercent: 0,
             opacity: 1,
-            filter: "blur(0px)",
             duration: .85,
             stagger: .04,
             ease: "power4.out",
@@ -154,49 +151,40 @@ const initLoader = () => {
         .to(".loader__panel--b", { yPercent: -100, duration: 1.15 }, "-=1")
         .to(".loader__panel--c", { yPercent: -100, duration: 1.15 }, "-=.95")
         .to(".loader", { autoAlpha: 0, duration: .1 })
-        .add(() => revealText(document.querySelector(".hero__title"), null), "-=.55")
+        .add(() => revealText(document.querySelector(isMobilePortfolio ? ".hero__title-mobile" : ".hero__title"), null), "-=.55")
         .fromTo(".hero .kicker .word", {
             yPercent: 110,
-            opacity: 0,
-            filter: "blur(8px)"
+            opacity: 0
         }, {
             yPercent: 0,
             opacity: 1,
-            filter: "blur(0px)",
             duration: .75,
             stagger: .04,
             ease: "power4.out"
         }, "-=.7")
-        .fromTo(".role-loop, .hero__actions, .hero__footer", {
+        .fromTo(".role-loop, .hero__actions, .hero__footer, .hero__quick-badges", {
             y: 30,
-            opacity: 0,
-            filter: "blur(10px)"
+            opacity: 0
         }, {
             y: 0,
             opacity: 1,
-            filter: "blur(0px)",
             duration: .9,
             stagger: .08,
             ease: "power4.out"
         }, "-=.6")
-        /* REMOVED CLIP-PATH AND RESET ENTRY VALUE target scale: 1 */
         .fromTo(".portrait__main", {
-            scale: 1.08,
-            filter: "blur(16px) saturate(.8)"
+            scale: 1.08
         }, {
             scale: 1,
-            filter: "blur(0px) saturate(1)",
             duration: 1.25,
             ease: "power4.out"
         }, "-=1")
         .fromTo(".portrait__tag", {
             y: 35,
-            opacity: 0,
-            filter: "blur(10px)"
+            opacity: 0
         }, {
             y: 0,
             opacity: 1,
-            filter: "blur(0px)",
             duration: .85,
             stagger: .08,
             ease: "power4.out"
@@ -205,7 +193,7 @@ const initLoader = () => {
 
 const initRoleLoop = () => {
     const roles = gsap.utils.toArray(".role-loop span")
-    if (!roles.length || prefersReducedMotion) {
+    if (!roles.length || prefersReducedMotion || isMobilePortfolio) {
         if (roles[0]) gsap.set(roles[0], { opacity: 1, y: 0 })
         return
     }
@@ -233,7 +221,7 @@ const initScrollProgress = () => {
 }
 
 const initHeroScroll = () => {
-    if (prefersReducedMotion) return
+    if (prefersReducedMotion || isMobilePortfolio) return
 
     const tl = gsap.timeline({
         scrollTrigger: {
@@ -245,8 +233,8 @@ const initHeroScroll = () => {
         }
     })
 
-    tl.to(".hero__title", { yPercent: -18, scale: .94, opacity: .55, filter: "blur(3px)", ease: "none" }, 0)
-        .to(".hero__bg-word", { scale: 1.18, opacity: .09, rotate: 4, ease: "none" }, 0)
+    tl.to(".hero__title", { yPercent: -20, scale: .92, opacity: .4, rotateX: 10, ease: "none" }, 0)
+        .to(".hero__bg-word", { scale: 1.25, opacity: .05, rotate: 6, ease: "none" }, 0)
         .to(".portrait", {yPercent: -10,rotateY: -10,rotateX: 4,z: 120,scale: 1.04,ease: "none"}, 0)
         .to(".portrait__main", {scale: 1.08, yPercent: -2, ease: "none"}, 0)
         .to(".hero__footer", { y: -60, opacity: 0, ease: "none" }, 0)
@@ -262,19 +250,18 @@ const initTextReveals = () => {
 }
 
 const initStory = () => {
-    if (prefersReducedMotion) return
+    if (prefersReducedMotion || isMobilePortfolio) return
 
     gsap.utils.toArray(".chapter").forEach((chapter) => {
         gsap.fromTo(chapter, {
-            y: 90,
-            opacity: .18,
-            scale: .94,
-            filter: "blur(14px)"
+            y: 120,
+            opacity: 0,
+            scale: .92,
+            rotateX: -10
         }, {
             y: 0,
             opacity: 1,
             scale: 1,
-            filter: "blur(0px)",
             ease: "power4.out",
             scrollTrigger: {
                 trigger: chapter,
@@ -297,26 +284,47 @@ const initStory = () => {
     })
 }
 
-const initMarquee = () => {
+const initSkillsAnimation = () => {
     if (prefersReducedMotion) return
 
-    document.querySelectorAll(".marquee").forEach((marquee, index) => {
-        const track = marquee.querySelector(".marquee__track")
-        const distance = track.scrollWidth / 2
-        const dir = index % 2 ? distance : -distance
-        const duration = index % 2 ? 36 : 32 // slightly slower for a smoother feel
+    gsap.fromTo(".skill-card", {
+        y: 40,
+        opacity: 0
+    }, {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        stagger: 0.08,
+        ease: "power3.out",
+        scrollTrigger: {
+            trigger: ".skills__grid",
+            start: "top 85%"
+        }
+    })
+}
 
-        // create a persistent tween so we can pause/resume on hover
-        const tween = gsap.to(track, {
-            x: dir,
-            duration,
-            ease: "none",
-            repeat: -1
+const initMobileAnimations = () => {
+    if (!isMobilePortfolio || prefersReducedMotion) return
+
+    // Simple, lightweight fade and scale animations for mobile
+    const elements = gsap.utils.toArray(".chapter, .case, .credentials__grid article, .contact__cards a")
+    
+    elements.forEach((el) => {
+        gsap.fromTo(el, {
+            y: 30,
+            opacity: 0,
+            scale: 0.96
+        }, {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: el,
+                start: "top 90%"
+            }
         })
-
-        // Pause the marquee on hover for readability, resume on leave
-        marquee.addEventListener('mouseenter', () => tween.pause())
-        marquee.addEventListener('mouseleave', () => tween.play())
     })
 }
 
@@ -327,7 +335,7 @@ const initProjects = () => {
     if (
         !cases.length ||
         !container ||
-        window.innerWidth <= 980 ||
+        isMobilePortfolio ||
         prefersReducedMotion
     ) return
 
@@ -382,10 +390,10 @@ const initProjects = () => {
 
         if (nextCard) {
             masterTl.to(card, {
-                filter: "blur(10px)",
                 opacity: 0,
-                scale: 0.92,
-                yPercent: -12,
+                scale: 0.88,
+                yPercent: -15,
+                rotateX: 4,
                 duration: 1,
                 ease: "power2.inOut"
             }, `card-${index + 1}-=0.45`)
@@ -394,9 +402,9 @@ const initProjects = () => {
 }
 
 const initProjectHover = () => {
-    if (window.innerWidth < 768 || prefersReducedMotion) return
+    if (window.innerWidth <= 980 || prefersReducedMotion) return
 
-    document.querySelectorAll(".case, .chapter, .credentials__grid article").forEach((element) => {
+    document.querySelectorAll(".case, .chapter, .credentials__grid article, .skill-card").forEach((element) => {
         element.addEventListener("mousemove", (event) => {
             const rect = element.getBoundingClientRect()
             const x = event.clientX - rect.left
@@ -442,7 +450,7 @@ const initActiveNav = () => {
 }
 
 const initCursor = () => {
-    if (!cursorGlow || window.innerWidth < 768 || prefersReducedMotion) return
+    if (!cursorGlow || window.innerWidth <= 980 || prefersReducedMotion) return
 
     window.addEventListener("mousemove", (event) => {
         gsap.to(cursorGlow, {
@@ -455,7 +463,7 @@ const initCursor = () => {
 }
 
 const initMagnetic = () => {
-    if (window.innerWidth < 768 || prefersReducedMotion) return
+    if (window.innerWidth <= 980 || prefersReducedMotion) return
 
     document.querySelectorAll(".magnetic").forEach((element) => {
         element.addEventListener("mousemove", (event) => {
@@ -472,7 +480,7 @@ const initMagnetic = () => {
 }
 
 const initFloating = () => {
-    if (prefersReducedMotion) return
+    if (prefersReducedMotion || isMobilePortfolio) return
 
     gsap.to(".portrait__tag--one", { y: -12, x: 8, duration: 3.4, repeat: -1, yoyo: true, ease: "sine.inOut" })
     gsap.to(".portrait__tag--two", { y: 14, x: -6, duration: 3.8, repeat: -1, yoyo: true, ease: "sine.inOut" })
@@ -488,7 +496,7 @@ const initFloating = () => {
 
 const initCanvasField = () => {
     const canvas = document.getElementById("field")
-    if (!canvas || window.innerWidth < 768 || prefersReducedMotion) return
+    if (!canvas || window.innerWidth <= 980 || prefersReducedMotion) return
 
     const ctx = canvas.getContext("2d")
     const particles = Array.from({ length: 70 }, () => ({
@@ -535,7 +543,7 @@ window.addEventListener("load", () => {
     initHeroScroll()
     initTextReveals()
     initStory()
-    initMarquee()
+    initSkillsAnimation()
     initProjects()
     initProjectHover()
     initActiveNav()
@@ -544,6 +552,7 @@ window.addEventListener("load", () => {
     initFloating()
     initCanvasField()
     initThemeToggle()
+    initMobileAnimations()
     setTimeout(() => {
     ScrollTrigger.refresh()
 }, 300)

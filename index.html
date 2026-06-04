@@ -415,10 +415,50 @@
     </div>
 
     
+    <!-- Teja AI Assistant -->
+    <div id="teja-ai-root">
+        <span class="ai-label">Ask Teja AI</span>
+        <button id="teja-ai-fab" aria-label="Open Ask Teja AI" title="Ask Teja AI">
+            <span class="teja-ai-fab-icon">💬</span>
+        </button>
+
+        <aside id="teja-ai-panel" class="teja-ai-panel" aria-hidden="true">
+            <header class="teja-ai-header">
+                <div class="teja-ai-avatar" aria-hidden="true">T</div>
+                <div class="teja-ai-title">
+                    <strong>Ask Teja AI</strong>
+                    <small>Your portfolio assistant</small>
+                </div>
+                <button id="teja-ai-close" class="teja-ai-close" aria-label="Close chat">✕</button>
+            </header>
+
+            <div class="teja-ai-body">
+                <div class="teja-ai-suggestions" id="teja-ai-suggestions">
+                    <button class="teja-ai-suggestion">🚀 Campus Connect</button>
+                    <button class="teja-ai-suggestion">☁️ AWS Experience</button>
+                    <button class="teja-ai-suggestion">💻 Technical Skills</button>
+                    <button class="teja-ai-suggestion">🎓 Education</button>
+                    <button class="teja-ai-suggestion">📄 Download Resume</button>
+                </div>
+
+                <div class="teja-ai-messages" id="teja-ai-messages" role="log" aria-live="polite" data-lenis-prevent="true"></div>
+            </div>
+
+            <form id="teja-ai-form" class="teja-ai-form" autocomplete="off">
+                <div class="teja-ai-input-wrap">
+                    <input id="teja-ai-input" class="teja-ai-input" placeholder="Ask about Teja, projects, or skills..." />
+                    <button type="submit" class="teja-ai-send" aria-label="Send">Send</button>
+                </div>
+            </form>
+        </aside>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/split-type"></script>
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <script src="assets/js/main.js"></script>
+    <link rel="stylesheet" href="assets/css/assistant.css">
+    <script src="assets/js/assistant.js" defer></script>
 </body>
 </html>

@@ -152,7 +152,7 @@ Formatting rules:
   async function sendMessage(text){
     const typingEl = pushTyping();
     try{
-      const res = await fetch('/api/chat', {
+      const res = await fetch('https://mvs5gdwhxsk756dg4l3algxuia0rbcyi.lambda-url.us-east-1.on.aws/', {
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ messages: chatHistory, system: SYSTEM_PROMPT })

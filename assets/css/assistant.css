@@ -47,10 +47,12 @@
 .ai-action-btn{display:inline-block;margin-top:8px;padding:8px 14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:#fff;text-decoration:none;font-size:13px;font-weight:600;transition:all 0.2s ease;}
 .ai-action-btn:hover{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.3);transform:translateY(-1px);}
 
-.teja-ai-form{padding:10px;border-top:1px solid rgba(255,255,255,0.02)}
-.teja-ai-input-wrap{display:flex;gap:8px}
-.teja-ai-input{flex:1;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#eaeaff;outline:none}
-.teja-ai-send{padding:10px 14px;border-radius:10px;border:none;background:var(--teja-gradient);color:white;cursor:pointer}
+.teja-ai-form{padding:12px;border-top:1px solid rgba(255,255,255,0.1)}
+.teja-ai-input-wrap{display:flex;gap:8px;background:rgba(255,255,255,0.05);padding:4px;border-radius:14px;border:1px solid rgba(255,255,255,0.1);}
+.teja-ai-input{flex:1;padding:10px 14px;border-radius:10px;border:none;background:transparent;color:#fff;outline:none;font-size:14px}
+.teja-ai-input::placeholder{color:rgba(255,255,255,0.4)}
+.teja-ai-send{padding:8px 16px;border-radius:10px;border:none;background:var(--teja-gradient);color:white;cursor:pointer;font-weight:600;transition:opacity 0.2s ease}
+.teja-ai-send:hover{opacity:0.9}
 
 /* Mobile adjustments */
 @media (max-width:520px){

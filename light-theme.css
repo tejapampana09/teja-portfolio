@@ -1809,6 +1809,52 @@ body.light-theme .hero__footer ion-icon {
         border-radius: 10px;
     }
 }
+}
+
+/* ==========================================================================
+   AI ASSISTANT LIGHT THEME OVERRIDES
+   ========================================================================== */
+body.light-theme .teja-ai-panel {
+    background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.85));
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    color: #050505;
+}
+
+body.light-theme .teja-ai-header {
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+body.light-theme .teja-ai-title strong,
+body.light-theme .teja-ai-title small,
+body.light-theme .teja-ai-close,
+body.light-theme .teja-ai-clear {
+    color: #050505;
+}
+
+body.light-theme .teja-ai-suggestion {
+    background: rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.08);
+    color: #050505;
+}
+
+body.light-theme .teja-ai-suggestion:hover {
+    background: rgba(0,0,0,0.1);
+}
+
+body.light-theme .teja-ai-message.ai {
+    background: rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.06);
+    color: #050505;
+}
+
+body.light-theme .teja-ai-input {
+    color: #050505 !important;
+}
+
+body.light-theme .teja-ai-input::placeholder {
+    color: rgba(0,0,0,0.4);
+}
 
 /* ======================================================
    COMPLETE LIGHT THEME FIX

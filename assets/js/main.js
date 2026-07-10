@@ -355,7 +355,7 @@ const initProjects = () => {
             end: () => `+=${window.innerHeight * cases.length}`,
             pin: true,
             pinSpacing: true,
-            scrub: 1.15,
+            scrub: 0.5,
             anticipatePin: 1,
             invalidateOnRefresh: true
         }

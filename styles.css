@@ -1525,11 +1525,17 @@ body.light-theme .skill-card:hover li {
 .skills-mobile,
 .chapter__icon,
 .chapter__mobile-title,
-.contact__cards,
 .button__mobile-label,
 .case__tags--mobile,
 .mobile-tabbar {
     display: none;
+}
+
+.contact__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
 }
 
 .hero__footer ion-icon {

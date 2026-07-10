@@ -22,7 +22,11 @@
 
 .teja-ai-body{padding:12px;display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0}
 .teja-ai-suggestions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
-.teja-ai-suggestion{background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);color:#e6e0ff;padding:8px 10px;border-radius:999px;font-size:13px;cursor:pointer}
+.teja-suggestion{background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);color:#e6e0ff;padding:8px 10px;border-radius:999px;font-size:13px;cursor:pointer;transition:background 0.2s ease;}
+.teja-ai-suggestion:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.1);}
+
+.teja-ai-clear{background:transparent;border:none;color:#cfcfe0;font-size:12px;cursor:pointer;margin-left:auto;padding:4px 8px;border-radius:4px;}
+.teja-ai-clear:hover{color:#fff;background:rgba(255,255,255,0.1);}
 
 .teja-ai-messages{flex:1;overflow-y:auto;padding:6px 6px 12px;display:flex;flex-direction:column;gap:10px;min-height:0;scroll-behavior:smooth}
 .teja-ai-messages::-webkit-scrollbar { width: 5px; }

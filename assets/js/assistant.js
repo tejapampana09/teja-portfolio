@@ -3,6 +3,7 @@
   const fab = document.getElementById('teja-ai-fab');
   const panel = document.getElementById('teja-ai-panel');
   const closeBtn = document.getElementById('teja-ai-close');
+  const clearBtn = document.getElementById('teja-ai-clear');
   const form = document.getElementById('teja-ai-form');
   const input = document.getElementById('teja-ai-input');
   const messagesEl = document.getElementById('teja-ai-messages');
@@ -92,6 +93,11 @@ Formatting rules:
     if(panel.classList.contains('open')) closePanel(); else openPanel();
   });
   closeBtn.addEventListener('click', closePanel);
+  clearBtn.addEventListener('click', () => {
+    chatHistory = [];
+    messagesEl.innerHTML = '';
+    showSuggestions();
+  });
 
   // suggestions
   suggestions.addEventListener('click', (e)=>{

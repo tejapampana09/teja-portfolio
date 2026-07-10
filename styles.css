@@ -858,15 +858,15 @@ main,
 
 .skill-card {
     position: relative;
-    border-radius: var(--radius);
-    background: var(--glass);
-    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: clamp(2rem, 4vw, 3rem);
     overflow: hidden;
-    backdrop-filter: blur(16px) saturate(120%);
-    -webkit-backdrop-filter: blur(16px) saturate(120%);
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
-                border-color 0.4s ease, 
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                border-color 0.3s ease, 
                 box-shadow 0.4s ease;
     will-change: transform, box-shadow;
 }
@@ -882,11 +882,11 @@ main,
 }
 
 .skill-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(255, 95, 31, 0.35);
+    transform: translateY(-12px);
+    border-color: rgba(255, 255, 255, 0.2);
     box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.4),
-        0 0 30px rgba(255, 95, 31, 0.1);
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(138, 43, 226, 0.15);
 }
 
 .skill-card:hover .skill-card__glow {

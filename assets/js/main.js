@@ -366,6 +366,7 @@ const initProjects = () => {
         const img = card.querySelector(".case__image img")
         const nextCard = cases[index + 1]
         const cardLabel = `card-${index}`
+        masterTl.addLabel(cardLabel)
 
         if (index > 0) {
             masterTl.to(card, {
@@ -434,6 +435,7 @@ const initProjectHover = () => {
 }
 
 const initActiveNav = () => {
+    if (!window.ScrollTrigger) return
     document.querySelectorAll("main section[id]").forEach((section) => {
         ScrollTrigger.create({
             trigger: section,
@@ -494,26 +496,61 @@ const initFloating = () => {
     })
 }
 
+const initPortraitTilt = () => {
+    if (window.innerWidth <= 980 || prefersReducedMotion) return
+    const portrait = document.getElementById('portrait')
+    if (!portrait) return
+
+    portrait.addEventListener('mousemove', (e) => {
+        const rect = portrait.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+
+        const tiltX = (y - rect.height / 2) / rect.height * 20
+        const tiltY = (rect.width / 2 - x) / rect.width * 20
+
+        portrait.style.transform = `perspective(600px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`
+    })
+
+    portrait.addEventListener('mouseleave', () => {
+        portrait.style.transform = 'perspective(600px) rotateX(0) rotateY(0)'
+    })
+}
+
 const initCanvasField = () => {
     const canvas = document.getElementById("field")
+    // Skip on mobile, reduced-motion, or low-end devices
     if (!canvas || window.innerWidth <= 980 || prefersReducedMotion) return
 
     const ctx = canvas.getContext("2d")
-    const particles = Array.from({ length: 70 }, () => ({
+    // Reduced particle count for better performance (was 70)
+    const particleCount = window.innerWidth <= 1280 ? 35 : 50
+    const particles = Array.from({ length: particleCount }, () => ({
         x: Math.random(),
         y: Math.random(),
         r: Math.random() * 1.4 + .35,
         s: Math.random() * .18 + .06
     }))
 
+    let animationId = null
+    let lastTime = 0
+
     const resize = () => {
-        canvas.width = window.innerWidth * Math.min(window.devicePixelRatio, 2)
-        canvas.height = window.innerHeight * Math.min(window.devicePixelRatio, 2)
+        const dpr = Math.min(window.devicePixelRatio, 2)
+        canvas.width = window.innerWidth * dpr
+        canvas.height = window.innerHeight * dpr
         canvas.style.width = `${window.innerWidth}px`
         canvas.style.height = `${window.innerHeight}px`
     }
 
-    const draw = () => {
+    const draw = (time) => {
+        // Throttle to ~30fps for performance
+        if (time - lastTime < 33) {
+            animationId = requestAnimationFrame(draw)
+            return
+        }
+        lastTime = time
+
         const dpr = Math.min(window.devicePixelRatio, 2)
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         particles.forEach((particle) => {
@@ -524,12 +561,21 @@ const initCanvasField = () => {
             ctx.arc(particle.x * canvas.width, particle.y * canvas.height, particle.r * dpr, 0, Math.PI * 2)
             ctx.fill()
         })
-        requestAnimationFrame(draw)
+        animationId = requestAnimationFrame(draw)
     }
 
     resize()
-    draw()
+    animationId = requestAnimationFrame(draw)
     window.addEventListener("resize", resize)
+
+    // Pause when tab is hidden
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            if (animationId) cancelAnimationFrame(animationId)
+        } else {
+            animationId = requestAnimationFrame(draw)
+        }
+    })
 }
 
 window.addEventListener("load", () => {
@@ -550,9 +596,11 @@ window.addEventListener("load", () => {
     initCursor()
     initMagnetic()
     initFloating()
+    initPortraitTilt()
     initCanvasField()
     initThemeToggle()
     initMobileAnimations()
+    initCopyEmail()
     setTimeout(() => {
     ScrollTrigger.refresh()
 }, 300)
@@ -600,5 +648,53 @@ function initThemeToggle() {
     btn.addEventListener('click', () => {
         const isLight = document.body.classList.contains('light-theme')
         setTheme(isLight ? 'dark' : 'light')
+    })
+}
+
+/* Toast notification system (reusable) */
+function showToast(message, iconName = 'checkmark-circle-outline') {
+    const container = document.getElementById('toast-container')
+    if (!container) return
+
+    const toast = document.createElement('div')
+    toast.className = 'toast'
+    toast.setAttribute('role', 'status')
+    toast.innerHTML = `<ion-icon name="${iconName}"></ion-icon><span>${message}</span>`
+    container.appendChild(toast)
+
+    // Trigger show animation
+    requestAnimationFrame(() => {
+        toast.classList.add('show')
+    })
+
+    // Auto-dismiss
+    setTimeout(() => {
+        toast.classList.remove('show')
+        setTimeout(() => toast.remove(), 400)
+    }, 2800)
+}
+
+/* Copy email to clipboard with toast feedback */
+function initCopyEmail() {
+    const btn = document.getElementById('copy-email')
+    if (!btn) return
+
+    btn.addEventListener('click', async (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        const email = btn.getAttribute('data-email') || 'tejapampana36@gmail.com'
+        try {
+            await navigator.clipboard.writeText(email)
+            showToast('Email copied to clipboard', 'copy-outline')
+        } catch (err) {
+            // Fallback for older browsers
+            const temp = document.createElement('textarea')
+            temp.value = email
+            document.body.appendChild(temp)
+            temp.select()
+            document.execCommand('copy')
+            temp.remove()
+            showToast('Email copied to clipboard', 'copy-outline')
+        }
     })
 }

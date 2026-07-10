@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Pampana Tulasi Teja - creative frontend engineer, realtime systems builder, and full stack developer.">
+    <meta name="author" content="Pampana Tulasi Teja">
+    <meta property="og:title" content="Pampana Tulasi Teja | Portfolio">
+    <meta property="og:description" content="Creative frontend engineer, realtime systems builder, and full stack developer.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
     <title>Pampana Tulasi Teja | Portfolio</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="assets/img/img.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <!-- <link rel="stylesheet" href="assets/css/styles.css"> -->
     <link rel="stylesheet" href="styles.css">
@@ -19,6 +25,8 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
+    <a href="#home" class="skip-link">Skip to content</a>
+    <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
     <div class="loader" aria-hidden="true">
         <div class="loader__panel loader__panel--a"></div>
         <div class="loader__panel loader__panel--b"></div>
@@ -65,9 +73,9 @@
         <section class="hero scene" id="home">
             <div class="hero__bg-word" aria-hidden="true">TEJA</div>
             <div class="hero__copy">
-                <p class="kicker split-line">Pampana Tulasi Teja </p>
-                <h1 class="hero__title split-title">Creative student passionate about building interfaces and realtime applications.</h1>
-                <h1 class="hero__title-mobile">Hello, I'm Teja.</h1>
+                <p class="kicker split-line">Pampana Tulasi Teja</p>
+                <h1 class="hero__title split-title">Building Realtime Interfaces & Full-Stack Experiences</h1>
+                <h1 class="hero__title-mobile">Building Realtime Interfaces & Full-Stack Experiences</h1>
                 <div class="role-loop" aria-label="Roles">
                     <span>Computer Science Student</span>
                     <span>Full Stack Developer</span>
@@ -76,8 +84,8 @@
                 </div>
                 <div class="hero__actions">
                     <a href="#projects" class="button button--solid magnetic">
-                        <span class="button__desktop-label">Projects</span>
-                        <span class="button__mobile-label">View Projects</span>
+                        <span class="button__desktop-label">View Projects</span>
+                        <span class="button__mobile-label">Projects</span>
                         <ion-icon name="arrow-forward-outline"></ion-icon>
                     </a>
                     <a href="teja gadu.pdf" class="button button--glass magnetic" download>
@@ -88,16 +96,19 @@
             </div>
 
             <div class="hero__portrait-wrap">
-                <div class="portrait" id="portrait">
-                    <img class="portrait__main" src="assets/img/img.png" alt="Pampana Tulasi Teja">
-                    <span class="portrait__tag portrait__tag--one">8.12 CGPA</span>
-                    <span class="portrait__tag portrait__tag--two">Firebase / Node</span>
-                </div>
+            <div class="portrait" id="portrait" data-tilt>
+                <img class="portrait__main" src="assets/img/img.png" alt="Pampana Tulasi Teja">
+                <span class="portrait__tag portrait__tag--one">8.12 CGPA</span>
+                <span class="portrait__tag portrait__tag--two">Firebase / Node</span>
+            </div>
             </div>
             <div class="hero__footer">
                 <span><ion-icon name="location-outline"></ion-icon>Andhra Pradesh, India</span>
                 <span><ion-icon name="briefcase-outline"></ion-icon>B.Tech Computer Science</span>
-                <span><ion-icon name="phone-portrait-outline"></ion-icon>Scroll to enter</span>
+                <a href="#home" class="scroll-indicator" aria-label="Scroll down">
+                    <span>Scroll to explore</span>
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                </a>
             </div>
             <div class="hero__quick-badges" aria-label="Quick facts">
                 <span><ion-icon name="ribbon-outline"></ion-icon>8.12 CGPA</span>
@@ -241,12 +252,13 @@
         <div class="projects__rail" id="projects-rail">
             <article class="case case--one">
                 <div class="case__image">
-                    <img src="assets/img/img.png" alt="Campus Connect">
+                    <img src="assets/img/img.png" alt="Campus Connect" loading="lazy">
                 </div>
                 <div class="case__content">
                     <span class="case__index">01</span>
                     <h3>Campus Connect</h3>
-                    <p>Realtime campus social platform with anonymous chat, friend systems, group chat, typing indicators, Firebase backend, and synchronization that keeps people present.</p>
+                    <p class="case__problem"><strong>Problem:</strong> Campus communities lacked a real-time space for anonymous expression and instant connection.</p>
+                    <p class="case__solution"><strong>Solution:</strong> Built a realtime social platform with Firebase Auth, Firestore sync, anonymous chat, friend/group systems, and typing indicators.</p>
                     <div class="case__tags">
                         <span>Firebase</span><span>Realtime Sync</span><span>Social Platform</span>
                     </div>
@@ -254,20 +266,21 @@
                         <span>Firebase</span><span>Firestore</span><span>JavaScript</span>
                     </div>
                     <div class="case__actions">
-                        <a href="https://campus-connectu-i1ys.vercel.app/" class="button button--solid magnetic">Live Demo</a>
-                        <a href="https://github.com/tejapampana09/Campus-Connectu.git" class="button button--glass magnetic">GitHub</a>
+                        <a href="https://campus-connectu-i1ys.vercel.app/" class="button button--solid magnetic" aria-label="View Campus Connect live demo">Live Demo</a>
+                        <a href="https://github.com/tejapampana09/Campus-Connectu.git" class="button button--glass magnetic" aria-label="View Campus Connect source code">GitHub</a>
                     </div>
                 </div>
             </article>
 
             <article class="case case--two">
                 <div class="case__image">
-                    <img src="assets/img/img1.png" alt="Vital Plasma">
+                    <img src="assets/img/img1.png" alt="Vital Plasma" loading="lazy">
                 </div>
                 <div class="case__content">
                     <span class="case__index">02</span>
                     <h3>Vital Plasma</h3>
-                    <p>Plasma donor management system with Node.js backend, REST APIs, donor registration, responsive UI, and realtime data handling for urgent workflows.</p>
+                    <p class="case__problem"><strong>Problem:</strong> Plasma donation workflows needed urgent, reliable donor coordination.</p>
+                    <p class="case__solution"><strong>Solution:</strong> Developed a Node.js + Express + MySQL system with REST APIs, donor registration, and realtime data handling for critical requests.</p>
                     <div class="case__tags">
                         <span>Node.js</span><span>REST APIs</span><span>Health Tech</span>
                     </div>
@@ -275,20 +288,21 @@
                         <span>Node.js</span><span>Express.js</span><span>MySQL</span>
                     </div>
                     <div class="case__actions">
-                        <a href="https://vital-plasma.onrender.com" class="button button--solid magnetic">Live Demo</a>
-                        <a href="https://github.com/tejapampana09/Vital-Plasma.git" class="button button--glass magnetic">GitHub</a>
+                        <a href="https://vital-plasma.onrender.com" class="button button--solid magnetic" aria-label="View Vital Plasma live demo">Live Demo</a>
+                        <a href="https://github.com/tejapampana09/Vital-Plasma.git" class="button button--glass magnetic" aria-label="View Vital Plasma source code">GitHub</a>
                     </div>
                 </div>
             </article>
 
             <article class="case case--three">
                 <div class="case__image">
-                    <img src="assets/img/img.png" alt="QuantumCrop AI">
+                    <img src="assets/img/img.png" alt="QuantumCrop AI" loading="lazy">
                 </div>
                 <div class="case__content">
                     <span class="case__index">03</span>
                     <h3>QuantumCrop AI</h3>
-                    <p>AI-powered smart agriculture concept with crop analysis, prediction logic, machine learning thinking, and scalable architecture for smarter decisions.</p>
+                    <p class="case__problem"><strong>Problem:</strong> Farmers needed smarter, data-driven crop decisions without complex tooling.</p>
+                    <p class="case__solution"><strong>Solution:</strong> Designed an AI-powered agriculture concept with Python, prediction logic, and scalable architecture for actionable insights.</p>
                     <div class="case__tags">
                         <span>Python</span><span>AI Concepts</span><span>Prediction System</span>
                     </div>
@@ -296,8 +310,8 @@
                         <span>Python</span><span>Machine Learning</span><span>AI</span>
                     </div>
                     <div class="case__actions">
-                        <a href="https://quantumcrop-ai.onrender.com" class="button button--solid magnetic">Live Demo</a>
-                        <a href="https://github.com/tejapampana09/QuantumCrop-AI.git" class="button button--glass magnetic">GitHub</a>
+                        <a href="https://quantumcrop-ai.onrender.com" class="button button--solid magnetic" aria-label="View QuantumCrop AI live demo">Live Demo</a>
+                        <a href="https://github.com/tejapampana09/QuantumCrop-AI.git" class="button button--glass magnetic" aria-label="View QuantumCrop AI source code">GitHub</a>
                     </div>
                 </div>
             </article>
@@ -348,10 +362,13 @@
             <p class="contact__text">Open to collaborations, hackathon teams, realtime app ideas, frontend experiments, and product builds with energy.</p>
             
             <div class="contact__cards">
-                <a href="mailto:tejapampana36@gmail.com">
-                    <span><ion-icon name="mail-outline"></ion-icon></span>
+                <a href="mailto:tejapampana36@gmail.com" id="email-link">
+                    <span><ion-icon name="mail-out-line"></ion-icon></span>
                     <strong>Email</strong>
                     <small>tejapampana36@gmail.com</small>
+                    <button type="button" class="copy-btn" id="copy-email" aria-label="Copy email address" data-email="tejapampana36@gmail.com">
+                        <ion-icon name="copy-outline"></ion-icon>
+                    </button>
                     <ion-icon name="chevron-forward-outline"></ion-icon>
                 </a>
                 <a href="https://github.com/tejapampana09">
@@ -460,5 +477,22 @@
     <script src="assets/js/main.js"></script>
     <link rel="stylesheet" href="assets/css/assistant.css">
     <script src="assets/js/assistant.js" defer></script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Pampana Tulasi Teja",
+        "jobTitle": "Frontend Engineer & Full Stack Developer",
+        "url": "https://github.com/tejapampana09/teja-portfolio",
+        "email": "tejapampana36@gmail.com",
+        "alumniOf": "SRM University AP",
+        "knowsAbout": ["Realtime Systems", "Firebase", "Node.js", "Frontend Development", "Full Stack Development"],
+        "sameAs": [
+            "https://github.com/tejapampana09",
+            "https://linkedin.com/in/tejapampana09"
+        ]
+    }
+    </script>
 </body>
 </html>

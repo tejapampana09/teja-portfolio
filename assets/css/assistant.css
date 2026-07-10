@@ -11,7 +11,7 @@
 #teja-ai-fab:active{transform:scale(.98)}
 .teja-ai-fab-icon{font-size:20px}
 
-.teja-ai-panel{width:380px;max-width:92vw;height:520px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));box-shadow:0 12px 40px rgba(2,6,23,0.7);backdrop-filter:blur(10px) saturate(120%);color:#e8e8ee;display:flex;flex-direction:column;position:fixed;right:20px;bottom:94px;transform:translateY(20px) scale(.98);opacity:0;pointer-events:none;transition:all .28s cubic-bezier(.2,.9,.2,1)}
+.teja-ai-panel{width:380px;max-width:92vw;height:520px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.05));border:1px solid rgba(255,255,255,0.15);box-shadow:0 12px 40px rgba(0,0,0,0.5);backdrop-filter:blur(24px) saturate(180%);color:#e8e8ee;display:flex;flex-direction:column;position:fixed;right:20px;bottom:94px;transform:translateY(20px) scale(.98);opacity:0;pointer-events:none;transition:all .28s cubic-bezier(.2,.9,.2,1)}
 .teja-ai-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto}
 
 .teja-ai-header{display:flex;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.03)}

@@ -1,0 +1,44 @@
+/* marquee.css */
+
+.marquee-section {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    background: #0C0C0C;
+    padding-top: clamp(6rem, 10vw, 10rem); /* pt-24 to pt-40 */
+    padding-bottom: 2.5rem; /* pb-10 */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* gap-3 */
+    z-index: 10;
+}
+
+.marquee-row {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+}
+
+.marquee-track {
+    display: flex;
+    gap: 0.75rem; /* gap-3 */
+    will-change: transform;
+}
+
+.marquee-track img {
+    width: 420px;
+    height: 270px;
+    border-radius: 1rem; /* rounded-2xl */
+    object-fit: cover; /* object-cover */
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .marquee-track img {
+        width: 280px;
+        height: 180px;
+    }
+}

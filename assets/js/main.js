@@ -1,4 +1,4 @@
-﻿const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 const isMobilePortfolio = window.matchMedia("(max-width: 980px)").matches
 
 // Register GSAP plugins globally and inject event normalization configuration
@@ -233,10 +233,10 @@ const initHeroScroll = () => {
         }
     })
 
-    tl.to(".hero__title", { yPercent: -20, scale: .92, opacity: .4, rotateX: 10, ease: "none" }, 0)
-        .to(".hero__bg-word", { scale: 1.25, opacity: .05, rotate: 6, ease: "none" }, 0)
-        .to(".portrait", {yPercent: -10,rotateY: -10,rotateX: 4,z: 120,scale: 1.04,ease: "none"}, 0)
-        .to(".portrait__main", {scale: 1.08, yPercent: -2, ease: "none"}, 0)
+    tl.to(".hero__title", { yPercent: -20, scale: .92, opacity: .4, ease: "none" }, 0)
+        .to(".hero__bg-word", { scale: 1.15, opacity: .05, ease: "none" }, 0)
+        .to(".portrait", { yPercent: -10, scale: 1.04, ease: "none" }, 0)
+        .to(".portrait__main", { scale: 1.08, yPercent: -2, ease: "none" }, 0)
         .to(".hero__footer", { y: -60, opacity: 0, ease: "none" }, 0)
         .to(".light--one", { x: 140, y: -60, scale: 1.2, ease: "none" }, 0)
 }
@@ -254,19 +254,16 @@ const initStory = () => {
 
     gsap.utils.toArray(".chapter").forEach((chapter) => {
         gsap.fromTo(chapter, {
-            y: 120,
-            opacity: 0,
-            scale: .92,
-            rotateX: -10
+            y: 60,
+            opacity: 0
         }, {
             y: 0,
             opacity: 1,
-            scale: 1,
-            ease: "power4.out",
+            ease: "power3.out",
             scrollTrigger: {
                 trigger: chapter,
-                start: "top 82%",
-                end: "center 48%",
+                start: "top 85%",
+                end: "center 55%",
                 scrub: true
             }
         })
@@ -287,20 +284,61 @@ const initStory = () => {
 const initSkillsAnimation = () => {
     if (prefersReducedMotion) return
 
+    // 1. Initial fade-in trigger (staggered entrance with i * 0.1 delay)
     gsap.fromTo(".skill-card", {
-        y: 40,
+        y: 50,
         opacity: 0
     }, {
         y: 0,
         opacity: 1,
-        duration: 0.7,
-        stagger: 0.08,
+        duration: 0.8,
+        stagger: 0.1, // delay by i * 0.1
         ease: "power3.out",
         scrollTrigger: {
             trigger: ".skills__grid",
-            start: "top 85%"
+            start: "top 88%",
+            once: true
         }
     })
+
+    // 2. Horizontal scrub movement on scroll (left/right sliding tracks)
+    if (isMobilePortfolio) return
+
+    const track1 = document.querySelector(".skills-track--1")
+    const track2 = document.querySelector(".skills-track--2")
+    const section = document.querySelector(".skills")
+
+    if (!track1 || !track2 || !section) return
+
+    // Track 1 moves RIGHT on scroll
+    gsap.fromTo(track1, 
+        { x: -120 },
+        {
+            x: 120,
+            ease: "none",
+            scrollTrigger: {
+                trigger: section,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1
+            }
+        }
+    )
+
+    // Track 2 moves LEFT on scroll
+    gsap.fromTo(track2, 
+        { x: 120 },
+        {
+            x: -120,
+            ease: "none",
+            scrollTrigger: {
+                trigger: section,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1
+            }
+        }
+    )
 }
 
 const initMobileAnimations = () => {
@@ -339,13 +377,16 @@ const initProjects = () => {
         prefersReducedMotion
     ) return
 
+    // Set z-index so later cards stack on top of earlier ones
+    // Align top offsets by index * 28px
     gsap.set(cases, {
-        zIndex: (i, target, arr) => arr.length - i
+        zIndex: (i) => i + 1,
+        top: (i) => `${i * 28}px`,
+        opacity: 1
     })
 
     gsap.set(cases.slice(1), {
-        yPercent: 100,
-        opacity: 0
+        yPercent: 100
     })
 
     const masterTl = gsap.timeline({
@@ -362,7 +403,6 @@ const initProjects = () => {
     })
 
     cases.forEach((card, index) => {
-
         const img = card.querySelector(".case__image img")
         const nextCard = cases[index + 1]
         const cardLabel = `card-${index}`
@@ -371,7 +411,6 @@ const initProjects = () => {
         if (index > 0) {
             masterTl.to(card, {
                 yPercent: 0,
-                opacity: 1,
                 duration: 1,
                 ease: "power2.out"
             }, `${cardLabel}-=0.45`)
@@ -390,11 +429,9 @@ const initProjects = () => {
         }
 
         if (nextCard) {
+            const targetScale = 1 - (cases.length - 1 - index) * 0.03
             masterTl.to(card, {
-                opacity: 0,
-                scale: 0.88,
-                yPercent: -15,
-                rotateX: 4,
+                scale: targetScale,
                 duration: 1,
                 ease: "power2.inOut"
             }, `card-${index + 1}-=0.45`)
@@ -496,24 +533,116 @@ const initFloating = () => {
     })
 }
 
-const initPortraitTilt = () => {
+const initPortraitMagnet = () => {
     if (window.innerWidth <= 980 || prefersReducedMotion) return
     const portrait = document.getElementById('portrait')
     if (!portrait) return
 
-    portrait.addEventListener('mousemove', (e) => {
+    const strength = 3
+    const padding = 150
+
+    portrait.style.transition = "transform 0.3s ease-out"
+    portrait.style.willChange = "transform"
+
+    window.addEventListener('mousemove', (e) => {
         const rect = portrait.getBoundingClientRect()
-        const x = e.clientX - rect.left
-        const y = e.clientY - rect.top
+        const centerX = rect.left + rect.width / 2
+        const centerY = rect.top + rect.height / 2
 
-        const tiltX = (y - rect.height / 2) / rect.height * 20
-        const tiltY = (rect.width / 2 - x) / rect.width * 20
+        const deltaX = e.clientX - centerX
+        const deltaY = e.clientY - centerY
 
-        portrait.style.transform = `perspective(600px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
+
+        if (distance < rect.width / 2 + padding) {
+            portrait.style.transition = "transform 0.3s ease-out"
+            const transX = deltaX / strength
+            const transY = deltaY / strength
+            portrait.style.transform = `translate3d(${transX}px, ${transY}px, 0)`
+        } else {
+            portrait.style.transition = "transform 0.6s ease-in-out"
+            portrait.style.transform = "translate3d(0, 0, 0)"
+        }
     })
 
     portrait.addEventListener('mouseleave', () => {
-        portrait.style.transform = 'perspective(600px) rotateX(0) rotateY(0)'
+        portrait.style.transition = "transform 0.6s ease-in-out"
+        portrait.style.transform = "translate3d(0, 0, 0)"
+    })
+}
+
+
+
+const initAboutTextReveal = () => {
+    if (prefersReducedMotion || !window.SplitType) return
+
+    // Animate chapters character-by-character
+    const paragraphs = document.querySelectorAll(".chapter p")
+    paragraphs.forEach((p) => {
+        const split = new SplitType(p, { types: "chars" })
+        
+        gsap.fromTo(split.chars, 
+            { opacity: 0.2 },
+            {
+                opacity: 1,
+                stagger: 0.02,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: p,
+                    start: "top 80%",
+                    end: "bottom 20%",
+                    scrub: true
+                }
+            }
+        )
+    })
+}
+
+/* CLEAN CINEMATIC REVEAL ENGINE: STAGGERED FADES AND PARALLAX */
+const initCinematicReveals = () => {
+    if (prefersReducedMotion || isMobilePortfolio) return
+
+    // Gentle vertical parallax for section headers and backgrounds
+    const bgWords = document.querySelectorAll(".hero__bg-word")
+    bgWords.forEach((bgWord) => {
+        gsap.to(bgWord, {
+            yPercent: 12,
+            ease: "none",
+            scrollTrigger: {
+                trigger: bgWord.closest(".scene") || document.body,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        })
+    })
+
+    // Cinematic fade reveals for main sections
+    const scenes = gsap.utils.toArray(".scene:not(.hero)")
+    scenes.forEach((scene) => {
+        const content = scene.querySelectorAll(
+            ".skills__container, .credentials__headline, .credentials__grid, .contact__text, .contact__cards, .contact__actions"
+        )
+        if (!content.length) return
+
+        gsap.fromTo(content, 
+            {
+                y: 35,
+                opacity: 0
+            },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.85,
+                stagger: 0.12,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: scene,
+                    start: "top 82%",
+                    once: true
+                }
+            }
+        )
     })
 }
 
@@ -596,7 +725,9 @@ window.addEventListener("load", () => {
     initCursor()
     initMagnetic()
     initFloating()
-    initPortraitTilt()
+    initPortraitMagnet()
+    initAboutTextReveal()
+    initCinematicReveals()
     initCanvasField()
     initThemeToggle()
     initMobileAnimations()

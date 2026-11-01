@@ -40,7 +40,7 @@ Projects:
    - Links: [Live Demo](https://quantumcrop-ai.onrender.com) | [Open GitHub](https://github.com/tejapampana09/QuantumCrop-AI.git)
 
 Resume:
-If they ask for a resume, provide this EXACT HTML button: <a href="teja%20gadu.pdf" class="ai-action-btn" download>📄 Download Resume</a>
+If they ask for a resume, provide this markdown link: [Download Resume](teja%20gadu.pdf)
 
 Contact:
 Email: tejapampana36@gmail.com
@@ -55,6 +55,8 @@ Formatting rules:
 
   let chatHistory = [];
   let hasOpened = false;
+  let sending = false;
+  let focusTimer;
 
   const quickSuggestionsHTML = `
     <button class="teja-ai-suggestion">🚀 Campus Connect</button>
@@ -70,6 +72,7 @@ Formatting rules:
   }
 
   function openPanel(){
+    panel.inert = false;
     panel.classList.add('open');
     panel.setAttribute('aria-hidden','false');
     fab.setAttribute('aria-expanded','true');
@@ -81,9 +84,13 @@ Formatting rules:
     }
     
     // focus input after open
-    setTimeout(()=> input.focus(),260);
+    clearTimeout(focusTimer);
+    focusTimer = setTimeout(() => { if (panel.classList.contains('open')) input.focus(); }, 220);
   }
   function closePanel(){
+    clearTimeout(focusTimer);
+    fab.focus();
+    panel.inert = true;
     panel.classList.remove('open');
     panel.setAttribute('aria-hidden','true');
     fab.setAttribute('aria-expanded','false');
@@ -102,7 +109,7 @@ Formatting rules:
   // suggestions
   suggestions.addEventListener('click', (e)=>{
     const btn = e.target.closest('.teja-ai-suggestion');
-    if(!btn) return;
+    if(!btn || sending) return;
     const q = btn.textContent.trim().replace(/^(🚀|☁️|💻|🎓|📄)\s*/, '');
     pushMessage('user', q);
     suggestions.style.display = 'none';
@@ -112,25 +119,45 @@ Formatting rules:
   form.addEventListener('submit', (e)=>{
     e.preventDefault();
     const val = input.value.trim();
-    if(!val) return;
+    if(!val || sending) return;
     pushMessage('user', val);
     input.value = '';
     suggestions.style.display = 'none';
     sendMessage(val);
   });
 
-  function parseMarkdown(text) {
-    // Convert links like [Text](URL) into action buttons
-    let html = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="ai-action-btn" target="_blank">$1</a>');
-    // Basic line breaks
-    html = html.replace(/\n/g, '<br>');
-    return html;
+  // Build links as DOM nodes; chat text must never be interpreted as HTML.
+  function renderMessage(element, text) {
+    const pattern = /\[([^\]]+)\]\(([^)]+)\)/g;
+    let cursor = 0;
+    for (const match of text.matchAll(pattern)) {
+      element.append(document.createTextNode(text.slice(cursor, match.index)));
+      let url;
+      try { url = new URL(match[2], window.location.href); } catch (_) {}
+      if (url && ['https:', 'http:', 'mailto:'].includes(url.protocol)) {
+        const link = document.createElement('a');
+        link.textContent = match[1];
+        link.href = url.href;
+        link.className = 'ai-action-btn';
+        if (url.origin === window.location.origin && url.pathname.endsWith('/teja%20gadu.pdf')) {
+          link.download = '';
+        } else {
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+        }
+        element.append(link);
+      } else {
+        element.append(document.createTextNode(match[0]));
+      }
+      cursor = match.index + match[0].length;
+    }
+    element.append(document.createTextNode(text.slice(cursor)));
   }
 
   function pushMessage(role, text){
     const el = document.createElement('div');
     el.className = 'teja-ai-message ' + (role==='user' ? 'user' : 'ai');
-    el.innerHTML = parseMarkdown(text);
+    renderMessage(el, String(text));
     messagesEl.appendChild(el);
     messagesEl.scrollTop = messagesEl.scrollHeight;
     
@@ -156,10 +183,16 @@ Formatting rules:
   }
 
   async function sendMessage(text){
+    sending = true;
+    const controls = [input, clearBtn, ...form.querySelectorAll('button'), ...suggestions.querySelectorAll('button')];
+    controls.forEach(control => control.disabled = true);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30000);
     const typingEl = pushTyping();
     try{
       const res = await fetch('https://mvs5gdwhxsk756dg4l3algxuia0rbcyi.lambda-url.us-east-1.on.aws/', {
         method:'POST',
+        signal: controller.signal,
         headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ messages: chatHistory, system: SYSTEM_PROMPT })
       });
@@ -175,12 +208,17 @@ Formatting rules:
       typingEl.remove();
       pushMessage('ai', 'Sorry, something went wrong.');
       console.error('chat error', err);
+    } finally {
+      clearTimeout(timeout);
+      sending = false;
+      controls.forEach(control => control.disabled = false);
     }
   }
 
   // keyboard shortcut: / to focus input
   window.addEventListener('keydown', (e)=>{
-    if(e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA'){
+    if (e.key === 'Escape' && panel.classList.contains('open')) { closePanel(); return; }
+    if(e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey && !document.activeElement.isContentEditable && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA'){
       e.preventDefault();
       if(!panel.classList.contains('open')) openPanel();
       input.focus();
